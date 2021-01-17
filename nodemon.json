@@ -1,0 +1,7 @@
+{
+  "env": {
+    "MONGODB_ATLAS_USERNAME": "Sayangmamah",
+    "MONGODB_ATLAS_PASSWORD": "Sayangmamah",
+    "MONGODB_ATLAS_DBNAME": "reactTodo"
+  }
+}
