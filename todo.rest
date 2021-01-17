@@ -6,3 +6,11 @@ content-type: application/json
   "title":"ini pertama buat api pake TypeScript",
   "status":"success"
 }
+
+###getData
+GET http://localhost:8080/api/getTodos
+content-type: application/json
+
+{
+  
+}

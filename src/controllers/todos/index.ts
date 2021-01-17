@@ -38,3 +38,45 @@ export const addTodo = async (req:Request, res:Response):Promise<void>=>{
     updateAllTodoAfterSave:updateAllTodoAfterSave
   })
 }
+
+export const updateTodo = async (req:Request, res:Response)=>{
+  const {
+    params:{id},
+    body
+} = req
+if(!body.title || !body.title || !id){
+  res.status(401).json({
+    status:401, errorMessge:'invalid'
+})
+return
+}
+  const updatedTodo = await TodoModel.findByIdAndUpdate({_id:id}, body)
+  const updatedAllTodosAfterUpdate = await TodoModel.find()
+
+  if(!updatedTodo){
+    res.status(501).json({status:501})
+    return
+  }
+  res.status(201).json({status:201, message:'todo succes created edit',
+  updatedTodo:updatedTodo, todos:updatedAllTodosAfterUpdate
+})
+
+}
+
+export const removeTodo = async (req:Request, res:Response)=>{
+  const {
+    params:{id}
+  } = req
+  if(!id){
+    res.status(401).json({status:401, errorMessge:'cant find'})
+    return
+  }
+  const removedTodo = await TodoModel.findByIdAndRemove(id)
+  const updatedAllTodosAfterUpdate = await TodoModel.find()
+
+  if(!removedTodo){
+    res.status(501).json({status:501, errorMessge:'cant removes fail'})
+    return
+  }
+  res.status(201).json({status:201, message:'succes deleted',removedTodo:removedTodo,todos:updatedAllTodosAfterUpdate})
+}
